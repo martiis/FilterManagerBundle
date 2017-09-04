@@ -18,12 +18,17 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface FilterManagerInterface
 {
+    const RESULT_RAW = 'raw';
+    const RESULT_ARRAY = 'array';
+    const RESULT_OBJECT = 'object';
+
     /**
      * Handles search request.
      *
      * @param Request $request
+     * @param string  $resultType
      *
      * @return SearchResponse
      */
-    public function handleRequest(Request $request);
+    public function handleRequest(Request $request, string $resultType = self::RESULT_OBJECT);
 }

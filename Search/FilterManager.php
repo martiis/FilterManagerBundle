@@ -75,19 +75,20 @@ class FilterManager implements FilterManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function handleRequest(Request $request)
+    public function handleRequest(Request $request, string $resultType = self::RESULT_OBJECT)
     {
-        return $this->search($this->container->buildSearchRequest($request));
+        return $this->search($this->container->buildSearchRequest($request), $resultType);
     }
 
     /**
      * Executes search.
      *
      * @param SearchRequest $request
+     * @param string        $resultType
      *
      * @return SearchResponse
      */
-    public function search(SearchRequest $request)
+    public function search(SearchRequest $request, string $resultType = self::RESULT_OBJECT)
     {
         $this->eventDispatcher->dispatch(ONGRFilterManagerEvents::PRE_SEARCH, new PreSearchEvent($request));
 
@@ -117,7 +118,18 @@ class FilterManager implements FilterManagerInterface
             );
         }
 
-        $result = $this->repository->findDocuments($search);
+        switch ($resultType) {
+            case self::RESULT_RAW:
+                $result = $this->repository->findRaw($search);
+                break;
+            case self::RESULT_ARRAY:
+                $result = $this->repository->findArray($search);
+                break;
+            case self::RESULT_OBJECT:
+            default:
+                $result = $this->repository->findDocuments($search);
+        }
+
         $this->eventDispatcher->dispatch(ONGRFilterManagerEvents::SEARCH_RESPONSE, new SearchResponseEvent($result));
 
         return new SearchResponse(
