@@ -54,7 +54,7 @@ abstract class AbstractFilter implements FilterInterface
 
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getTags()
     {

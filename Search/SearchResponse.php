@@ -12,7 +12,7 @@
 namespace ONGR\FilterManagerBundle\Search;
 
 use JMS\Serializer\Serializer;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\FilterManagerBundle\Filter\ViewData;
 use ONGR\FilterManagerBundle\SerializableInterface;
 
@@ -22,7 +22,7 @@ use ONGR\FilterManagerBundle\SerializableInterface;
 class SearchResponse implements SerializableInterface
 {
     /**
-     * @var DocumentIterator Elasticsearch response object.
+     * @var AbstractResultsIterator Elasticsearch response object.
      */
     private $result;
 
@@ -42,10 +42,10 @@ class SearchResponse implements SerializableInterface
     private $serializer;
 
     /**
-     * @param ViewData[]       $filters
-     * @param DocumentIterator $result
-     * @param array            $urlParameters
-     * @param Serializer       $serializer
+     * @param ViewData[]              $filters
+     * @param AbstractResultsIterator $result
+     * @param array                   $urlParameters
+     * @param Serializer              $serializer
      */
     public function __construct($filters, $result, $urlParameters, $serializer)
     {
@@ -64,7 +64,7 @@ class SearchResponse implements SerializableInterface
     }
 
     /**
-     * @return DocumentIterator
+     * @return AbstractResultsIterator
      */
     public function getResult()
     {

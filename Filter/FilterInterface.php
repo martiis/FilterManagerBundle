@@ -11,8 +11,8 @@
 
 namespace ONGR\FilterManagerBundle\Filter;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\FilterManagerBundle\Filter\Helper\DocumentFieldAwareInterface;
 use ONGR\FilterManagerBundle\Filter\Helper\RequestFieldAwareInterface;
 use ONGR\FilterManagerBundle\Filter\Relation\RelationAwareInterface;
@@ -73,12 +73,12 @@ interface FilterInterface extends
     /**
      * Prepares all needed filter data to pass into view.
      *
-     * @param DocumentIterator $result Search results.
-     * @param ViewData         $data   Initial view data.
+     * @param AbstractResultsIterator $result Search results.
+     * @param ViewData                $data   Initial view data.
      *
      * @return ViewData
      */
-    public function getViewData(DocumentIterator $result, ViewData $data);
+    public function getViewData(AbstractResultsIterator $result, ViewData $data);
 
     /**
      * Returns all tags assigned to the filter.

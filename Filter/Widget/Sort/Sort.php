@@ -11,8 +11,8 @@
 
 namespace ONGR\FilterManagerBundle\Filter\Widget\Sort;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;
 use ONGR\FilterManagerBundle\Filter\FilterState;
 use ONGR\FilterManagerBundle\Filter\Helper\ViewDataFactoryInterface;
@@ -71,7 +71,7 @@ class Sort extends AbstractFilter implements ViewDataFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         /** @var ChoicesAwareViewData $data */
         foreach ($this->getChoices() as $key => $choice) {

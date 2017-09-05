@@ -11,12 +11,12 @@
 
 namespace ONGR\FilterManagerBundle\Filter\Widget\Choice;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchBundle\Result\Aggregation\AggregationValue;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\FilterAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 use ONGR\ElasticsearchDSL\Query\TermLevel\TermQuery;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\FilterManagerBundle\Filter\FilterState;
 use ONGR\FilterManagerBundle\Filter\Helper\SortAwareTrait;
 use ONGR\FilterManagerBundle\Filter\Helper\ViewDataFactoryInterface;
@@ -87,7 +87,7 @@ class SingleTermChoice extends AbstractFilter implements ViewDataFactoryInterfac
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         /** @var ChoicesAwareViewData $data */
 
@@ -167,12 +167,12 @@ class SingleTermChoice extends AbstractFilter implements ViewDataFactoryInterfac
     /**
      * Fetches buckets from search results.
      *
-     * @param DocumentIterator $result Search results.
-     * @param string           $name   Filter name.
+     * @param AbstractResultsIterator $result Search results.
+     * @param string                  $name   Filter name.
      *
-     * @return AggregationValue.
+     * @return AggregationValue
      */
-    protected function fetchAggregation(DocumentIterator $result, $name)
+    protected function fetchAggregation(AbstractResultsIterator $result, $name)
     {
         $aggregation = $result->getAggregation($name);
         if (isset($aggregation)) {

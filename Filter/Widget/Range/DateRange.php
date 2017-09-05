@@ -11,7 +11,7 @@
 
 namespace ONGR\FilterManagerBundle\Filter\Widget\Range;
 
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\FilterManagerBundle\Filter\ViewData;
 use ONGR\FilterManagerBundle\Filter\ViewData\RangeAwareViewData;
 
@@ -23,7 +23,7 @@ class DateRange extends Range
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         $name = $data->getState()->getName();
 

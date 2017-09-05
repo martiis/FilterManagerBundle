@@ -11,6 +11,7 @@
 
 namespace ONGR\FilterManagerBundle\Filter\Widget\Dynamic;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchBundle\Result\Aggregation\AggregationValue;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\FilterAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\NestedAggregation;
@@ -153,7 +154,7 @@ class DynamicAggregate extends AbstractFilter implements ViewDataFactoryInterfac
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         $unsortedChoices = [];
         $activeNames = $data->getState()->isActive() ? array_keys($data->getState()->getValue()) : [];
@@ -206,13 +207,13 @@ class DynamicAggregate extends AbstractFilter implements ViewDataFactoryInterfac
     /**
      * Fetches buckets from search results.
      *
-     * @param DocumentIterator $result     Search results.
-     * @param string           $filterName Filter name.
-     * @param array            $values     Values from the state object
+     * @param AbstractResultsIterator $result     Search results.
+     * @param string                  $filterName Filter name.
+     * @param array                   $values     Values from the state object
      *
      * @return array Buckets.
      */
-    protected function fetchAggregation(DocumentIterator $result, $filterName, $values)
+    protected function fetchAggregation(AbstractResultsIterator $result, $filterName, $values)
     {
         $data = [];
         $values = empty($values) ? [] : $values;
@@ -315,8 +316,8 @@ class DynamicAggregate extends AbstractFilter implements ViewDataFactoryInterfac
      * Forms $unsortedChoices array with all possible choices.
      * 0 is assigned to the document count of the choices.
      *
-     * @param DocumentIterator $result
-     * @param ViewData         $data
+     * @param AbstractResultsIterator $result
+     * @param ViewData                $data
      *
      * @return array
      */

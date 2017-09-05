@@ -11,8 +11,8 @@
 
 namespace ONGR\FilterManagerBundle\Filter\Widget\Pager;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\FilterManagerBundle\Filter\FilterState;
 use ONGR\FilterManagerBundle\Filter\Helper\ViewDataFactoryInterface;
 use ONGR\FilterManagerBundle\Filter\ViewData;
@@ -81,7 +81,7 @@ class Pager extends AbstractFilter implements ViewDataFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         /** @var ViewData\PagerAwareViewData $data */
 
@@ -91,7 +91,6 @@ class Pager extends AbstractFilter implements ViewDataFactoryInterface
             $this->getCountPerPage(),
             $this->getOption('max_pages', 10)
         );
-
 
         return $data;
     }

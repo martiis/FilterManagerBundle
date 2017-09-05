@@ -19,7 +19,6 @@ use ONGR\FilterManagerBundle\SerializableInterface;
  */
 class FilterState implements SerializableInterface
 {
-
     use OptionsAwareTrait;
 
     /**

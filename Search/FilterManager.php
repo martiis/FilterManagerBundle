@@ -12,9 +12,9 @@
 namespace ONGR\FilterManagerBundle\Search;
 
 use JMS\Serializer\Serializer;
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Search;
 use ONGR\ElasticsearchBundle\Service\Repository;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\FilterManagerBundle\Event\PreProcessSearchEvent;
 use ONGR\FilterManagerBundle\Event\PreSearchEvent;
 use ONGR\FilterManagerBundle\Event\SearchResponseEvent;
@@ -176,12 +176,12 @@ class FilterManager implements FilterManagerInterface
     /**
      * Creates view data for each filter.
      *
-     * @param DocumentIterator $result
-     * @param SearchRequest    $request
+     * @param AbstractResultsIterator $result
+     * @param SearchRequest           $request
      *
      * @return ViewData[]
      */
-    protected function getFiltersViewData(DocumentIterator $result, SearchRequest $request)
+    protected function getFiltersViewData(AbstractResultsIterator $result, SearchRequest $request)
     {
         $out = [];
 

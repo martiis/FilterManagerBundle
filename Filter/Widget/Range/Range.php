@@ -11,9 +11,9 @@
 
 namespace ONGR\FilterManagerBundle\Filter\Widget\Range;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Aggregation\Metric\StatsAggregation;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\FilterManagerBundle\Filter\FilterState;
 use ONGR\FilterManagerBundle\Filter\ViewData;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,7 +66,7 @@ class Range extends AbstractRange
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         $name = $data->getState()->getName();
         /** @var $data ViewData\RangeAwareViewData */

@@ -11,8 +11,8 @@
 
 namespace ONGR\FilterManagerBundle\Filter\Widget\Search;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\FilterManagerBundle\Filter\FilterState;
 use ONGR\FilterManagerBundle\Filter\ViewData;
 use ONGR\FilterManagerBundle\Filter\Widget\AbstractFilter;
@@ -25,7 +25,7 @@ abstract class AbstractSingleValue extends AbstractFilter
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         return $data;
     }
