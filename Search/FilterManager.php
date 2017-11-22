@@ -11,7 +11,6 @@
 
 namespace ONGR\FilterManagerBundle\Search;
 
-use JMS\Serializer\Serializer;
 use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Search;
 use ONGR\ElasticsearchBundle\Service\Repository;
@@ -83,7 +82,6 @@ class FilterManager implements FilterManagerInterface
     public function search(SearchRequest $request, string $resultType = self::RESULT_OBJECT)
     {
         $this->eventDispatcher->dispatch(ONGRFilterManagerEvents::PRE_SEARCH, new PreSearchEvent($request));
-
         $search = $this->container->buildSearch($request);
 
         /** @var FilterInterface $filter */
@@ -103,11 +101,7 @@ class FilterManager implements FilterManagerInterface
                 new PreProcessSearchEvent($request->get($name), $relatedSearch)
             );
 
-            $filter->preProcessSearch(
-                $search,
-                $relatedSearch,
-                $request->get($name)
-            );
+            $filter->preProcessSearch($search, $relatedSearch, $request->get($name));
         }
 
         switch ($resultType) {
@@ -122,7 +116,9 @@ class FilterManager implements FilterManagerInterface
                 $result = $this->repository->findDocuments($search);
         }
 
-        $this->eventDispatcher->dispatch(ONGRFilterManagerEvents::SEARCH_RESPONSE, new SearchResponseEvent($result));
+        $this
+            ->eventDispatcher
+            ->dispatch(ONGRFilterManagerEvents::SEARCH_RESPONSE, new SearchResponseEvent($result));
 
         return new SearchResponse(
             $this->getFiltersViewData($result, $request),

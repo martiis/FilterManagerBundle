@@ -11,7 +11,6 @@
 
 namespace ONGR\FilterManagerBundle\Search;
 
-use Doctrine\Common\Cache\Cache;
 use ONGR\ElasticsearchDSL\Search;
 use ONGR\FilterManagerBundle\Filter\FilterInterface;
 use ONGR\FilterManagerBundle\Relation\FilterIterator;
@@ -24,16 +23,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class FilterContainer extends ParameterBag
 {
-    /**
-     * @var Cache
-     */
-    private $cache;
-
-    /**
-     * @var int
-     */
-    private $lifeTime;
-
     /**
      * @var array
      */

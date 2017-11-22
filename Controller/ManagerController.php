@@ -13,7 +13,6 @@ namespace ONGR\FilterManagerBundle\Controller;
 
 use ONGR\FilterManagerBundle\DependencyInjection\ONGRFilterManagerExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -33,10 +32,7 @@ class ManagerController extends Controller
      */
     public function managerAction(Request $request, $managerName, $template)
     {
-        return $this->render(
-            $template,
-            $this->getFilterManagerResponse($request, $managerName)
-        );
+        return $this->render($template, $this->getFilterManagerResponse($request, $managerName));
     }
 
     /**
@@ -50,7 +46,8 @@ class ManagerController extends Controller
     protected function getFilterManagerResponse(Request $request, $managerName)
     {
         return [
-            'filter_manager' => $this->get(ONGRFilterManagerExtension::getFilterManagerId($managerName))
+            'filter_manager' => $this
+                ->get(ONGRFilterManagerExtension::getFilterManagerId($managerName))
                 ->handleRequest($request)
         ];
     }
