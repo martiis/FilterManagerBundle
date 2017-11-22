@@ -54,27 +54,4 @@ class ManagerController extends Controller
                 ->handleRequest($request)
         ];
     }
-
-    /**
-     * Returns JSON response with search response data.
-     *
-     * @param Request $request Request.
-     * @param string  $name    Filter manager name.
-     *
-     * @return JsonResponse
-     */
-    public function jsonAction(Request $request, $managerName)
-    {
-        $data = $this->get(ONGRFilterManagerExtension::getFilterManagerId($managerName))
-            ->handleRequest($request)
-            ->getSerializableData();
-
-        $response = new JsonResponse($data);
-
-        if ($request->query->has('pretty')) {
-            $response->setEncodingOptions(JSON_PRETTY_PRINT);
-        }
-
-        return $response;
-    }
 }

@@ -22,7 +22,6 @@ class AppKernel extends Kernel
             new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
             new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
             new ONGR\FilterManagerBundle\Tests\app\fixture\TestBundle\TestBundle(),
-            new \JMS\SerializerBundle\JMSSerializerBundle(),
         ];
     }
 

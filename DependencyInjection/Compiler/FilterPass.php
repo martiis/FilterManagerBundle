@@ -84,8 +84,7 @@ class FilterPass implements CompilerPassInterface
                 [
                     $filterContainer,
                     new Reference($managerOptions['repository']),
-                    new Reference('event_dispatcher'),
-                    new Reference('jms_serializer')
+                    new Reference('event_dispatcher')
                 ]
             );
 

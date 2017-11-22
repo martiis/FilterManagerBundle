@@ -13,12 +13,11 @@ namespace ONGR\FilterManagerBundle\Tests\app\fixture\TestBundle\Document;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
 use ONGR\ElasticsearchBundle\Collection\Collection;
-use ONGR\FilterManagerBundle\SerializableInterface;
 
 /**
  * @ES\Document(type="product")
  */
-class Product implements SerializableInterface
+class Product
 {
     /**
      * @var string
@@ -142,17 +141,5 @@ class Product implements SerializableInterface
     public function __construct()
     {
         $this->attributes = new Collection();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSerializableData()
-    {
-        return [
-            '_id' => $this->id,
-            'title' => $this->title,
-            'color' => $this->color,
-        ];
     }
 }

@@ -50,26 +50,18 @@ class FilterManager implements FilterManagerInterface
     private $eventDispatcher;
 
     /**
-     * @var Serializer
-     */
-    private $serializer;
-
-    /**
      * @param FilterContainer          $container
      * @param Repository               $repository
      * @param EventDispatcherInterface $eventDispatcher
-     * @param Serializer $serializer
      */
     public function __construct(
         FilterContainer $container,
         Repository $repository,
-        EventDispatcherInterface $eventDispatcher,
-        $serializer
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->container = $container;
         $this->repository = $repository;
         $this->eventDispatcher = $eventDispatcher;
-        $this->serializer = $serializer;
     }
 
     /**
@@ -135,8 +127,7 @@ class FilterManager implements FilterManagerInterface
         return new SearchResponse(
             $this->getFiltersViewData($result, $request),
             $result,
-            $this->composeUrlParameters($request),
-            $this->serializer
+            $this->composeUrlParameters($request)
         );
     }
 

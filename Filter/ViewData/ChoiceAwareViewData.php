@@ -11,12 +11,10 @@
 
 namespace ONGR\FilterManagerBundle\Filter\ViewData;
 
-use ONGR\FilterManagerBundle\SerializableInterface;
-
 /**
  * This class holds data for filter choice.
  */
-class ChoiceAwareViewData implements SerializableInterface
+class ChoiceAwareViewData
 {
     /**
      * @var bool
@@ -142,20 +140,5 @@ class ChoiceAwareViewData implements SerializableInterface
     public function setMode($mode)
     {
         $this->mode = $mode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSerializableData()
-    {
-        return [
-            'active' => $this->isActive(),
-            'default' => $this->isDefault(),
-            'url_params' => $this->getUrlParameters(),
-            'label' => $this->getLabel(),
-            'mode' => $this->getMode(),
-            'count' => $this->getCount(),
-        ];
     }
 }

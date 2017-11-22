@@ -69,26 +69,6 @@ class PagerAwareViewData extends ViewData
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getSerializableData()
-    {
-        $data = parent::getSerializableData();
-
-        $data['pager'] = [
-            'total_items' => $this->totalItems,
-            'num_pages' => $this->numPages,
-            'first_page' => 1,
-            'previous_page' => $this->getPreviousPage(),
-            'current_page' => $this->currentPage,
-            'next_page' => $this->getNextPage(),
-            'last_page' => $this->numPages,
-        ];
-
-        return $data;
-    }
-
-    /**
      * Get previous page number.
      *
      * @return int|null

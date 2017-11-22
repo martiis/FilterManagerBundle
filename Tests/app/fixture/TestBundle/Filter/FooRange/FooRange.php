@@ -11,10 +11,10 @@
 
 namespace ONGR\FilterManagerBundle\Tests\app\fixture\TestBundle\Filter\FooRange;
 
+use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\ElasticsearchDSL\Aggregation\Metric\StatsAggregation;
 use ONGR\ElasticsearchDSL\Query\TermLevel\RangeQuery;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchBundle\Result\DocumentIterator;
 use ONGR\FilterManagerBundle\Filter\FilterState;
 use ONGR\FilterManagerBundle\Filter\Helper\ViewDataFactoryInterface;
 use ONGR\FilterManagerBundle\Filter\ViewData;
@@ -78,7 +78,7 @@ class FooRange extends AbstractFilter implements ViewDataFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getViewData(DocumentIterator $result, ViewData $data)
+    public function getViewData(AbstractResultsIterator $result, ViewData $data)
     {
         /** @var $data ViewData\RangeAwareViewData */
         $data->setMinBounds($result->getAggregation('range_agg')['min']);

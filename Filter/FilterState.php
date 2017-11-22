@@ -12,12 +12,11 @@
 namespace ONGR\FilterManagerBundle\Filter;
 
 use ONGR\FilterManagerBundle\Filter\Helper\OptionsAwareTrait;
-use ONGR\FilterManagerBundle\SerializableInterface;
 
 /**
  * This class defines data structure to represent filter state.
  */
-class FilterState implements SerializableInterface
+class FilterState
 {
     use OptionsAwareTrait;
 
@@ -103,16 +102,5 @@ class FilterState implements SerializableInterface
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSerializableData()
-    {
-        return [
-            'active' => $this->active,
-            'value' => $this->value,
-        ];
     }
 }

@@ -15,43 +15,6 @@ use ONGR\FilterManagerBundle\Filter\ViewData\PagerAwareViewData;
 
 class PagerAwareViewDataTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetData()
-    {
-        $pagerData = new PagerAwareViewData();
-        $pagerData->setState($this->createMock('ONGR\FilterManagerBundle\Filter\FilterState'));
-
-        $this->assertEquals(
-            [
-                'total_items' => 1,
-                'num_pages' => null,
-                'first_page' => 1,
-                'previous_page' => null,
-                'current_page' => 1,
-                'next_page' => null,
-                'last_page' => null,
-
-            ],
-            $pagerData->getSerializableData()['pager']
-        );
-
-        $pagerData->setData(100, 2, 12, 5);
-
-        $this->assertEquals(
-            [
-                'total_items' => 100,
-                'num_pages' => 9,
-                'first_page' => 1,
-                'previous_page' => 1,
-                'current_page' => 2,
-                'next_page' => 3,
-                'last_page' => 9,
-            ],
-            $pagerData->getSerializableData()['pager']
-        );
-
-        $this->assertEquals(2, $pagerData->getCurrentPage());
-    }
-
     public function testCheckPageNavigation()
     {
         $pagerData = new PagerAwareViewData();

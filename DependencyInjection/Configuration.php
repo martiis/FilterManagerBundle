@@ -11,9 +11,7 @@
 
 namespace ONGR\FilterManagerBundle\DependencyInjection;
 
-use ONGR\ElasticsearchDSL\Aggregation\TermsAggregation;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 

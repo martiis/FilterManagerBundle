@@ -11,15 +11,13 @@
 
 namespace ONGR\FilterManagerBundle\Search;
 
-use JMS\Serializer\Serializer;
 use ONGR\ElasticsearchBundle\Result\AbstractResultsIterator;
 use ONGR\FilterManagerBundle\Filter\ViewData;
-use ONGR\FilterManagerBundle\SerializableInterface;
 
 /**
  * This class holds full response of documents and filters data.
  */
-class SearchResponse implements SerializableInterface
+class SearchResponse
 {
     /**
      * @var AbstractResultsIterator Elasticsearch response object.
@@ -37,22 +35,15 @@ class SearchResponse implements SerializableInterface
     private $urlParameters;
 
     /**
-     * @var Serializer
-     */
-    private $serializer;
-
-    /**
      * @param ViewData[]              $filters
      * @param AbstractResultsIterator $result
      * @param array                   $urlParameters
-     * @param Serializer              $serializer
      */
-    public function __construct($filters, $result, $urlParameters, $serializer)
+    public function __construct($filters, $result, $urlParameters)
     {
         $this->filters = $filters;
         $this->result = $result;
         $this->urlParameters = $urlParameters;
-        $this->serializer = $serializer;
     }
 
     /**
@@ -77,28 +68,5 @@ class SearchResponse implements SerializableInterface
     public function getUrlParameters()
     {
         return $this->urlParameters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSerializableData()
-    {
-        $data = [
-            'count' => $this->result->count(),
-            'documents' => [],
-            'filters' => [],
-            'url_parameters' => $this->urlParameters,
-        ];
-
-        foreach ($this->result as $document) {
-            $data['documents'][] = $this->serializer->toArray($document);
-        }
-
-        foreach ($this->filters as $name => $filter) {
-            $data['filters'][$name] = $filter->getSerializableData();
-        }
-
-        return $data;
     }
 }
